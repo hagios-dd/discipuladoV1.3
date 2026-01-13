@@ -308,7 +308,7 @@
     padding: var(--space-lg) 0;
     border-bottom: 1px solid rgba(184, 184, 190, 0.2);
 
-    background-image: url("assets/images/cristotrono.png");
+    background-image: url("./assets/images/cristotrono.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
