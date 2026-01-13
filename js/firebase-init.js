@@ -1,0 +1,24 @@
+// js/firebase-init.js
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";  // Adicionado
+
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCdgrS0jjiycKQeMyn1f74n5pysRaTkal8",
+  authDomain: "hagios-36157.firebaseapp.com",
+  projectId: "hagios-36157",
+  storageBucket: "hagios-36157.firebasestorage.app",
+  messagingSenderId: "864204953458",
+  appId: "1:864204953458:web:165e6689237e92b9642feb",
+  measurementId: "G-HB1XPBS73P"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
+const db = getFirestore(app);  // Adicionado
+
+export { auth, googleProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, db, doc, getDoc, setDoc, updateDoc };
+

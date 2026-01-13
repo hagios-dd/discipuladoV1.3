@@ -1,0 +1,76 @@
+/* ============================================
+   VARIÁVEIS DE DESIGN SYSTEM - DARK MODE ONLY
+   ============================================ */
+
+:root {
+    /* ===== PALETA DE REFERÊNCIA ===== */
+    --color-gray-light: #B9B9BE;
+    --color-gray-dark: #151515;
+    --color-gray-medium: #777878;
+    
+    /* VERDE PRINCIPAL (NEON) */
+    --color-primary: #DCFF00;
+    --color-primary-light: #E2F99A;
+    --color-primary-dark: #DCFF00;
+    --gradient-primary:#3AB4AC;
+    
+    /* CORES COMPLEMENTARES */
+    --color-secondary: #4ECDC4;
+    --color-secondary-dark: #3AB4AC;
+    --color-accent: #FF8E53;
+    --color-accent-dark: #E67A42;
+    --color-success: #A8E65F;
+    --color-warning: #FFB74D;
+    --color-error: #FF6B6B;
+    
+    /* ===== TONS DE TEXTO (OTIMIZADOS PARA DARK) ===== */
+    --color-text-primary: #F8F9FA;
+    --color-text-secondary: #B9B9BE;
+    --color-text-tertiary: #777878;
+    --color-text-primary-white: #FFFFFF;
+    --color-text-on-primary: #151515; /* Invertido para legibilidade sobre o verde neon */
+    --color-text-on-secondary: #FFFFFF;
+    
+    /* ===== TONS DE FUNDO (DARK) ===== */
+    --color-background: #151515;
+    --color-background-card: #28272E;
+    --color-background-header: #151515;
+    --color-background-sidebar: #1A1C22;
+    --color-background-modal: rgba(0, 0, 0, 0.7);
+    
+    /* ===== SOMBRAS (MAIS PROFUNDAS PARA DARK) ===== */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.5);
+    
+    /* ===== BORDAS ===== */
+    --border-radius-sm: 8px;
+    --border-radius-md: 12px;
+    --border-radius-lg: 16px;
+    --border-radius-xl: 20px;
+    --border-radius-circle: 50%;
+    
+    /* ===== ESPAÇAMENTOS ===== */
+    --space-xs: 0.5rem;
+    --space-sm: 0.75rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+    
+    /* ===== TIPOGRAFIA ===== */
+    --font-family-base: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+    --font-size-md: 1rem;
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
+    --line-height-normal: 1.5;
+    
+    /* ===== TRANSITIONS ===== */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* ===== OUTRAS ===== */
+    --container-max-width: 1200px;
+    --header-height: 64px;
+}

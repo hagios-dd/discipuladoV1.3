@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hagios - Login</title>
+      <link rel="icon" type="image/x-icon" href="/assets/images/fav.png">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-lg);
+            background-image: url(/assets/images/fundolog.jpg);
+            background-size: cover;
+        }
+       .login-card {
+    background: var(--color-background-card);
+    padding: var(--space-2xl);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-xl);
+    width: 100%;
+    max-width: 420px;
+    border-top: 3px solid var(--accent); /* Opcional: detalhe no topo com o amarelo */
+}
+
+.login-logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: var(--space-xl);
+    max-width: 100%; /* Garante que não ultrapasse o card em telas pequenas */
+    height: auto;
+
+}
+        .form-group {
+            margin-bottom: var(--space-lg);
+        }
+        .input-field {
+            width: 100%;
+            padding: var(--space-md);
+            border: 2px solid rgba(184,184,190,0.3);
+            border-radius: var(--border-radius-md);
+            font-size: var(--font-size-md);
+            transition: all var(--transition-normal);
+        }
+        .input-field:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(213,246,111,0.2);
+        }
+        .login-actions {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            margin-top: var(--space-xl);
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <img src="assets/images/hagios-logo.png" alt="Hagios" class="login-logo">
+
+            <h2 class="text-center mb-4" id="form-title">Bem-vindo de volta</h2>
+
+            <div id="login-form">
+                <div class="form-group">
+                    <input type="email" id="email-login" class="input-field" placeholder="Seu e-mail" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password-login" class="input-field" placeholder="Sua senha" required>
+                </div>
+                <div class="login-actions">
+                    <button id="btn-login" class="btn btn--primary">Entrar</button>
+                    <button id="btn-google-login" class="btn btn--secondary">
+                        <i class="fab fa-google"></i> Entrar com Google
+                    </button>
+                    <p class="text-center">Não tem conta? <a href="#" id="switch-to-signup" style="color:var(--color-primary);">Criar conta</a></p>
+                </div>
+            </div>
+
+            <div id="signup-form" style="display:none;">
+                <div class="form-group">
+                    <input type="text" id="name-signup" class="input-field" placeholder="Seu nome completo" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email-signup" class="input-field" placeholder="Seu e-mail" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password-signup" class="input-field" placeholder="Sua senha (mín. 6 caracteres)" required>
+                </div>
+                <div class="login-actions">
+                    <button id="btn-signup" class="btn btn--primary">Criar conta</button>
+                    <button id="btn-google-signup" class="btn btn--secondary">
+                        <i class="fab fa-google"></i> Cadastrar com Google
+                    </button>
+                    <p class="text-center">Já tem conta? <a href="#" id="switch-to-login" style="color:var(--color-primary);">Fazer login</a></p>
+                </div>
+            </div>
+
+            <p id="error-message" class="text-center mt-3" style="color:var(--color-error); display:none;"></p>
+        </div>
+    </div>
+
+    <script type="module">
+        import { auth, googleProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "./js/firebase-init.js";
+
+        import { db, doc, setDoc } from "./js/firebase-init.js";
+
+        const signupForm = document.getElementById('signup-form');
+        const loginForm = document.getElementById('login-form');
+        const switchToLogin = document.getElementById('switch-to-login');
+        const switchToSignup = document.getElementById('switch-to-signup');
+        const errorMessage = document.getElementById('error-message');
+        const formTitle = document.getElementById('form-title');
+
+        switchToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            signupForm.style.display = 'none';
+            loginForm.style.display = 'block';
+            formTitle.textContent = 'Bem-vindo de volta';
+        });
+
+        switchToSignup.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginForm.style.display = 'none';
+            signupForm.style.display = 'block';
+            formTitle.textContent = 'Crie sua conta';
+        });
+
+        // Cadastro com e-mail
+        document.getElementById('btn-signup').addEventListener('click', async () => {
+            const name = document.getElementById('name-signup').value;
+            const email = document.getElementById('email-signup').value;
+            const password = document.getElementById('password-signup').value;
+            
+            if (!name) {
+                errorMessage.textContent = 'Por favor, informe seu nome';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                
+                // Salvar perfil no Firestore
+                await setDoc(doc(db, "usuarios", user.uid), {
+                    nome: name,
+                    email: email,
+                    criadoEm: new Date().toISOString(),
+                    progresso: {
+                        modulosConcluidos: []
+                    }
+                });
+                
+                window.location.href = 'home.html';
+            } catch (err) {
+                console.error(err);
+                errorMessage.textContent = err.message.includes('weak-password') ? 'Senha muito fraca (mínimo 6 caracteres)' : 'Erro ao criar conta';
+                errorMessage.style.display = 'block';
+            }
+        });
+
+        // Login com e-mail
+        document.getElementById('btn-login').addEventListener('click', () => {
+            const email = document.getElementById('email-login').value;
+            const password = document.getElementById('password-login').value;
+            signInWithEmailAndPassword(auth, email, password)
+                .then(() => window.location.href = 'home.html')
+                .catch(err => {
+                    errorMessage.textContent = 'E-mail ou senha incorretos';
+                    errorMessage.style.display = 'block';
+                });
+        });
+
+        // Google (funciona para login e cadastro)
+        const googleButtons = [document.getElementById('btn-google-signup'), document.getElementById('btn-google-login')];
+        googleButtons.forEach(btn => {
+            btn.addEventListener('click', async () => {
+                try {
+                    const result = await signInWithPopup(auth, googleProvider);
+                    const user = result.user;
+                    
+                    // Verificar se o perfil já existe, se não, criar
+                    // (Nota: setDoc com merge:true ou apenas setDoc se for a primeira vez)
+                    await setDoc(doc(db, "usuarios", user.uid), {
+                        nome: user.displayName,
+                        email: user.email,
+                        ultimoLogin: new Date().toISOString()
+                    }, { merge: true });
+                    
+                    window.location.href = 'home.html';
+                } catch (err) {
+                    errorMessage.textContent = 'Erro com Google';
+                    errorMessage.style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

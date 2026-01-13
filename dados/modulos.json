@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "titulo": "Módulo 1: A Revelação de Cristo Jesus",
+    "subtitulo": "A Majestade, Divindade e Glória do Filho",
+    "descricao": "Aprenda a contemplar Cristo como fonte de toda transformação.",
+    "status": "em_andamento",
+    "link": "modulo1.json",
+    "icone": "fas fa-eye",
+    "duracao": "2 semanas",
+    "versiculoChave": "Salmos 27:4"
+  },
+  {
+    "id": 2,
+    "titulo": "Módulo 2: O Senhorio de Cristo",
+    "subtitulo": "Submetendo Toda a Vida ao Seu Governo",
+    "descricao": "Entenda o que significa viver sob a autoridade de Jesus.",
+    "status": "bloqueado",
+    "link": "modulo2.json",
+    "icone": "fas fa-crown",
+    "duracao": "2 semanas",
+    "versiculoChave": "Colossenses 1:18"
+  },
+  {
+    "id": 3,
+    "titulo": "Módulo 3: A Vida no Espírito",
+    "subtitulo": "Andando na Dependência do Consolador",
+    "descricao": "Viva guiado e capacitado pelo Espírito Santo.",
+    "status": "bloqueado",
+    "link": "modulo3.json",
+    "icone": "fas fa-dove",
+    "duracao": "3 semanas",
+    "versiculoChave": "Gálatas 5:25"
+  },
+  {
+    "id": 4,
+    "titulo": "Módulo 4: A Comunhão dos Santos",
+    "subtitulo": "Vivendo em Corpo, Cuidando como Família",
+    "descricao": "Descubra o propósito divino para a comunidade cristã.",
+    "status": "bloqueado",
+    "link": "modulo4.json",
+    "icone": "fas fa-users",
+    "duracao": "2 semanas",
+    "versiculoChave": "1 Coríntios 12:27"
+  },
+  {
+    "id": 5,
+    "titulo": "Módulo 5: Missão Integral",
+    "subtitulo": "Sendo Sal e Luz no Mundo",
+    "descricao": "Compreenda e viva sua missão no contexto atual.",
+    "status": "bloqueado",
+    "link": "modulo5.json",
+    "icone": "fas fa-handshake",
+    "duracao": "3 semanas",
+    "versiculoChave": "Mateus 5:13-16"
+  }
+]

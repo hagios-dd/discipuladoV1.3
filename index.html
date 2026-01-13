@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hagios</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="assets/images/fav.png">
+    <style>
+        .splash {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            overflow: hidden;
+            z-index: 9999;
+        }
+        .splash-images {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+        }
+        .splash-images.active {
+            opacity: 1;
+        }
+        .splash-logo {
+            position: relative;
+            z-index: 2;
+            max-width: 400px;
+            width: 80%;
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.5));
+            animation: pulse 4s infinite alternate;
+        }
+        .splash-skip {
+            position: absolute;
+            bottom: 40px;
+            color: white;
+            background: rgba(0,0,0,0.4);
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            z-index: 3;
+        }
+        @keyframes pulse {
+            from { transform: scale(0.95); }
+            to { transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body>
+    <div class="splash" id="splash">
+        <!-- Imagens de fundo com pre-carregamento -->
+        <div class="splash-images active" id="splash-bg"></div>
+        
+        <div class="splash-skip" onclick="skipSplash()">Seja Bem-Vindo <i class="fas fa-arrow-right"></i></div>
+    </div>
+
+    <script>
+        const imageUrls = [
+            'assets/images/splash1.png',
+            'assets/images/splash2.png',
+            'assets/images/splash3.png',
+            'assets/images/splash4.png',
+            'assets/images/splash5.png'
+        ];
+        
+        const splashBg = document.getElementById('splash-bg');
+        let current = 0;
+        const totalTime = 5000;
+
+        // Pre-carregar imagens
+        imageUrls.forEach(url => {
+            const img = new Image();
+            img.src = url;
+        });
+
+        function changeImage() {
+            current = (current + 1) % imageUrls.length;
+            splashBg.style.backgroundImage = `url('${imageUrls[current]}')`;
+        }
+
+        // Definir primeira imagem
+        splashBg.style.backgroundImage = `url('${imageUrls[0]}')`;
+
+        const interval = setInterval(changeImage, 1000);
+
+        setTimeout(() => {
+            clearInterval(interval);
+            window.location.href = 'login.html';
+        }, totalTime);
+
+        function skipSplash() {
+            clearInterval(interval);
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>

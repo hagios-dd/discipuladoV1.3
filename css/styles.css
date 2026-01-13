@@ -1,0 +1,287 @@
+/* ============================================
+   ARQUIVO PRINCIPAL DE ESTILOS
+   Importa todos os módulos CSS
+   ============================================ */
+
+/* 1. Variáveis de design system */
+@import '01-variables.css';
+
+/* 2. Reset e normalização */
+@import '02-reset.css';
+
+/* 3. Estilos base */
+@import '03-base.css';
+
+/* 4. Componentes reutilizáveis */
+@import '04-components.css';
+
+/* 5. Estilos específicos por módulo */
+@import '05-modules.css';
+
+/* 6. Classes utilitárias */
+@import '06-utilities.css';
+
+/* 7. Melhorias e enhancements */
+@import '07-enhancements.css';  /* ← NOVO ARQUIVO */
+
+
+/* =====================================================
+   ESTILOS DO QUIZ
+===================================================== */
+
+.quiz-container {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background-color: var(--color-bg-secondary);
+}
+
+.quiz-questions {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+}
+
+.quiz-questions li {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.quiz-questions li:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.quiz-questions li p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: var(--color-text-primary);
+}
+
+.quiz-option {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+    cursor: pointer;
+    padding: 0.75rem;
+    border-radius: var(--radius-md);
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.quiz-option:hover {
+    background-color: var(--color-bg-primary);
+    border-color: var(--color-border);
+}
+
+/* .quiz-option input[type="radio"] {
+    display: none;
+} */
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--color-primary);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    display: none;
+    z-index: 10000;
+}
+.toast.show { display: block; animation: slideIn 0.3s ease; }
+@keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+.toast--error { background: var(--color-error); }
+.toast--success { background: var(--color-success); }
+
+.btn--success {
+    background-color: var(--color-success) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.module-card.module-status--bloqueado {
+    opacity: 0.7;
+    filter: grayscale(0.5);
+}
+
+.module-card.module-status--bloqueado .btn-abrir-modulo {
+    background-color: var(--color-gray-light);
+    color: var(--color-text-secondary);
+}
+
+.quiz-option__label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+.quiz-option__letter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    background-color: var(--color-bg-secondary);
+    border: 2px solid var(--color-border);
+    border-radius: 50%;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+}
+
+.quiz-option__text {
+    flex: 1;
+    line-height: 1.5;
+    color: var(--color-text-primary);
+}
+
+/* Estado selecionado */
+.quiz-option input[type="radio"]:checked + .quiz-option__label .quiz-option__letter {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+}
+
+.quiz-option input[type="radio"]:checked + .quiz-option__label .quiz-option__text {
+    color: var(--color-primary);
+    font-weight: 500;
+}
+
+.quiz-option input[type="radio"]:checked ~ .quiz-option__label {
+    color: var(--color-primary);
+}
+
+/* Estado correto */
+.quiz-option.correct .quiz-option__letter {
+    background-color: var(--color-success);
+    border-color: var(--color-success);
+    color: white;
+}
+
+.quiz-option.correct .quiz-option__text {
+    color: var(--color-success);
+}
+
+/* Estado incorreto */
+.quiz-option.incorrect .quiz-option__letter {
+    background-color: var(--color-error);
+    border-color: var(--color-error);
+    color: white;
+}
+
+.quiz-option.incorrect .quiz-option__text {
+    color: var(--color-error);
+    opacity: 0.8;
+}
+
+/* Feedback do quiz */
+.quiz-feedback {
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    background-color: var(--color-bg-primary);
+    border: 1px solid var(--color-border);
+}
+
+#quiz-resultado {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    padding: 0.75rem;
+    border-radius: var(--radius-md);
+}
+
+#quiz-pontuacao {
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.5rem 0.75rem;
+    background-color: var(--color-bg-secondary);
+    border-radius: var(--radius-md);
+    display: inline-block;
+}
+
+/* Estilo para resultado positivo */
+.quiz-success #quiz-resultado {
+    background-color: rgba(var(--color-success-rgb), 0.1);
+    color: var(--color-success);
+    border-left: 4px solid var(--color-success);
+}
+
+/* Estilo para resultado que precisa melhorar */
+.quiz-warning #quiz-resultado {
+    background-color: rgba(var(--color-warning-rgb), 0.1);
+    color: var(--color-warning);
+    border-left: 4px solid var(--color-warning);
+}
+
+/* Botão do quiz */
+#btn-calcular-quiz {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+}
+
+/* Desafio prático */
+.desafio-pratico {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background-color: var(--color-bg-secondary);
+}
+
+.desafio-pratico h4 {
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+
+.desafio-pratico label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: var(--radius-md);
+    transition: background-color 0.2s ease;
+}
+
+.desafio-pratico label:hover {
+    background-color: var(--color-bg-primary);
+}
+
+.desafio-pratico input[type="checkbox"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    cursor: pointer;
+}
+
+/* Ajustes para mobile */
+@media (max-width: 768px) {
+    .quiz-option {
+        padding: 0.5rem;
+    }
+    
+    .quiz-option__label {
+        gap: 0.5rem;
+    }
+    
+    .quiz-option__letter {
+        width: 1.5rem;
+        height: 1.5rem;
+        font-size: 0.875rem;
+    }
+    
+    #quiz-resultado {
+        font-size: 1rem;
+    }
+}
